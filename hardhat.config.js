@@ -1,6 +1,5 @@
 require("dotenv").config({ path: __dirname + "/.env.local" }); // When deploying -- be careful about this path..
 require("@nomiclabs/hardhat-ethers");
-require("hardhat-deploy");
 require("@nomicfoundation/hardhat-toolbox");
 
 console.log(process.env.INFURA_API_KEY);

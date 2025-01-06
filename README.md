@@ -214,6 +214,11 @@ _(ONLY for running remotely)_
 3. Now click on **Export private Key** and enter your metamask password.
 4. Get this and paste in `.env.local` file as `PRIVATE_KEY`.
 
+- Update the dependencies in the project by running the following command:
+  ```sh
+  yarn upgrade
+  ```
+
 ## Running locally _(with **hardhat**)_ 🏃‍♂️
 
 _(Run these commands by being in project root directory)_
@@ -246,6 +251,11 @@ _(Run these commands by being in project root directory)_
    yarn dev
   ```
   - This will run server on `127.0.0.1:5173`
+
+- Update the dependencies in the project by running the following command:
+  ```sh
+  yarn upgrade
+  ```
 
 ## Running remotely 🏃‍♂️
 
