@@ -11,6 +11,8 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 // [block-chain] smart-contract related imports..
 import {
@@ -34,17 +36,26 @@ function HomePage() {
 
   // hooks..
   const [campaignsList, setCampaignsList] = React.useState([]);
+  const [responseMsg, setResponseMsg] = React.useState(""); // to display error messages.
+  const [showResponse, setShowResponse] = React.useState(false); // To know whether error occured. ⁉ why not use length of error message
+  const [responseSeverity, setResponseSeverity] = React.useState("error");
 
   useEffect(() => {
     // console.log("useEffect called");
     let ignore = false;
     // fetch the campaigns..
     const fetchData = async () => {
-      const deployedCampaignsList = await getDeployedCampaigns(); // call the function to fetch the data
-      // console.log(deployedCampaignsList);
-      setCampaignsList(await getCampaignsSummary(deployedCampaignsList));
-      console.log("fetched campaigns");
-      console.log(campaignsList);
+      try {
+        const deployedCampaignsList = await getDeployedCampaigns(); // call the function to fetch the data
+        // console.log(deployedCampaignsList);
+        setCampaignsList(await getCampaignsSummary(deployedCampaignsList));
+        console.log("fetched campaigns");
+        console.log(campaignsList);
+      } catch (error) {
+        setResponseMsg("Error fetching campaigns: " + error.message);
+        setShowResponse(true);
+        setResponseSeverity("error");
+      }
     };
 
     // fetch the data..
@@ -53,6 +64,13 @@ function HomePage() {
       ignore = true; // to avoid rendering multiple times..
     };
   }, []);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowResponse(false);
+  };
 
   return (
     <Box className="App">
@@ -114,6 +132,16 @@ function HomePage() {
         </Box>
       </Container>
       <Footer />
+      <Snackbar
+        open={showResponse}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
+        <Alert onClose={handleClose} severity={responseSeverity}>
+          {responseMsg}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
