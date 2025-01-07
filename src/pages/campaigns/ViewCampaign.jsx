@@ -1,4 +1,3 @@
-// UI imports..
 import React from "react";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
@@ -15,23 +14,15 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Chip from "@mui/material/Chip";
 import { LoadingButton } from "@mui/lab";
 
-// local imports..
 import NavBar from "../../components/NavBar";
-// service imports..
 import axios from "axios";
 import { useEffect } from "react";
-// Wallet connection..
 import { useWallet } from "use-wallet";
-// form handling
 import { useForm } from "react-hook-form";
-// [block-chain] smart-contract related imports..
 import { getCampaignDetails } from "../../../utils/getCampaigns";
-
-// smart-contract interaction -- for contribution of funds, withdrawing money & ending campaign.
 import Campaign from "../../../utils/contract/campaign";
 import web3 from "../../../utils/web3";
 
-// stylings..
 const StyledModal = styled(Modal)({
   display: "flex",
   alignItems: "center",
@@ -41,22 +32,20 @@ const StyledModal = styled(Modal)({
 const api_url = "http://localhost:4000/api/";
 
 function ViewCampaign() {
-  const campaignId = window.location.pathname.substring(10); // will get as '/campaign/xx`, trimmed to get ONLY the id.
+  const campaignId = window.location.pathname.substring(10);
 
-  // hooks..
-  const [responseMsg, setResponseMsg] = React.useState(""); // to display error messages.
-  const [showResponse, setShowResponse] = React.useState(false); // To know whether error occured. ⁉ why not use length of error message
+  const [responseMsg, setResponseMsg] = React.useState("");
+  const [showResponse, setShowResponse] = React.useState(false);
   const [responseSeverity, setResponseSeverity] = React.useState("error");
 
   const [abortCampaignMsg, setAbortCampaignMsg] = React.useState("");
 
-  const [fundingAmount, setFundingAmount] = React.useState(0); // set this via ref's and onchange.
+  const [fundingAmount, setFundingAmount] = React.useState(0);
   const enteredAmountRef = React.useRef(0);
 
   const [campaignData, setCampaignData] = React.useState({});
   const wallet = useWallet();
 
-  // for dealing with form values -- at contribution..
   const {
     handleSubmit: contributionHandleSubmit,
     register: contributionRegister,
@@ -66,7 +55,6 @@ function ViewCampaign() {
     mode: "onChange",
   });
 
-  // for dealing with form values -- at abort campaign..
   const {
     handleSubmit: abortHandleSubmit,
     register: abortRegister,
@@ -76,7 +64,6 @@ function ViewCampaign() {
     mode: "onChange",
   });
 
-  // for dealing with form values -- at withdraw raised funds..
   const {
     handleSubmit: withdrawHandleSubmit,
     register: withdrawRegister,
@@ -92,13 +79,10 @@ function ViewCampaign() {
   const [abortingError, setAbortingError] = React.useState("");
   const [endAndWithdrawError, setEndAndWithdrawError] = React.useState("");
 
-  // for testing purpose..
-  const etherScanAddress = "0x4d496ccc28058b1d74b7a19541663e21154f9c84"; // some dummy address.
-  // these are for the -- campaignData[] -- where usage of '.' operator isn't working.
+  const etherScanAddress = "0x4d496ccc28058b1d74b7a19541663e21154f9c84";
   const minAmountKey = "minContribAmount";
   const raisedMoneyKey = "ethRaised";
 
-  // hooks..
   const [showEndCampaignConfirmation, setShowEndCampaignConfirmation] =
     React.useState(false);
   const [acceptanceStatus, setAcceptanceStatus] = React.useState(false);
@@ -106,7 +90,6 @@ function ViewCampaign() {
   useEffect(() => {
     console.log("fetching a campaign..");
     let ignore = false;
-    // fetch the campaigns..
     const fetchData = async () => {
       await getCampaignDetails(campaignId).then((data) => {
         console.info(data);
@@ -114,14 +97,13 @@ function ViewCampaign() {
       });
     };
 
-    fetchData(); // call the function to fetch the data
+    fetchData();
 
     return () => {
-      ignore = true; // to avoid rendering multiple times..
+      ignore = true;
     };
   }, []);
 
-  // helpers ..
   function LinearProgressWithLabel(props) {
     return (
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -137,26 +119,23 @@ function ViewCampaign() {
     );
   }
 
-  // async function abortCampaign() {
   const handleAbortCampaign = async (data) => {
     console.log("abort campaign called");
     console.log(data);
     if (data.acceptCondition === false && data.campaignAbortReason.length == 0)
       return;
 
-    // proceed further, only when valid.
     console.log("about to perform aborting..");
     try {
-      const campaign = Campaign(campaignData.id); // get the campaign
-      const accounts = await web3.eth.getAccounts(); // backer account..
+      const campaign = Campaign(campaignData.id);
+      const accounts = await web3.eth.getAccounts();
       await campaign.methods.abortCampaignAndRefund().send({
         from: accounts[0],
       });
 
       console.log("abort success");
       window.location.reload();
-      // after successful abort..
-      abortReset("", { keepValues: false }); // clear the values entered.
+      abortReset("", { keepValues: false });
     } catch (err) {
       console.log(err);
       setAbortingError(err);
@@ -194,16 +173,14 @@ function ViewCampaign() {
           message: `Contribution cannot be < ${campaignData.minContribAmount}.`,
         };
 
-      const campaign = Campaign(campaignData.id); // get the campaign
-      const accounts = await web3.eth.getAccounts(); // backer account..
+      const campaign = Campaign(campaignData.id);
+      const accounts = await web3.eth.getAccounts();
       await campaign.methods.contribute().send({
-        // register contribution..
         from: accounts[0],
         value: web3.utils.toWei(data.contribAmount, "ether"),
       });
 
-      // after successful contribution..
-      contributionReset("", { keepValues: false }); // clear the values entered.
+      contributionReset("", { keepValues: false });
       setIsContributionSuccess(true);
     } catch (err) {
       console.log(err);
@@ -214,13 +191,12 @@ function ViewCampaign() {
   const handleEndAndWithdraw = async (data) => {
     console.log("Withdraw called");
     try {
-      const campaign = Campaign(campaignData.id); // get the campaign
-      const accounts = await web3.eth.getAccounts(); // backer account..
+      const campaign = Campaign(campaignData.id);
+      const accounts = await web3.eth.getAccounts();
       await campaign.methods.endCampaignAndCredit().send({
         from: accounts[0],
       });
 
-      // after successful end & credit..
       console.log("Funds credited successfully to fundraiser's wallet.");
       window.location.reload();
     } catch (err) {
@@ -229,8 +205,6 @@ function ViewCampaign() {
     }
   };
 
-  // components..
-  // other modules..
   function ShowCampaignDetails() {
     return (
       <>
@@ -377,7 +351,6 @@ function ViewCampaign() {
                 inputProps={{
                   step: 0.00001,
                   min: campaignData[minAmountKey],
-                  // max: campaignData[raisedMoneyKey],
                 }}
                 disabled={contributionFormState.isSubmitting}
                 {...contributionRegister("contribAmount", { required: true })}
@@ -390,8 +363,8 @@ function ViewCampaign() {
                   severity="error"
                   sx={{ marginTop: 2, marginBottom: 2 }}
                   onClose={() => {
-                    setContributionError(""); // erase the error msg.
-                    window.location.reload(); // re-load the page to get the updated status
+                    setContributionError("");
+                    window.location.reload();
                   }}
                 >
                   <AlertTitle>{contributionError.name}</AlertTitle>
@@ -451,7 +424,6 @@ function ViewCampaign() {
         <Typography variant="h6" gutterBottom>
           Withdraw Raised Funds
         </Typography>
-        {/* -------- Here.. based on the deadline of the campaign, validate can withdraw or not. */}
         <Alert severity="info" sx={{ marginTop: 1 }}>
           To withdraw raised funds, campaign has to be <strong>ended</strong>
         </Alert>
@@ -460,8 +432,8 @@ function ViewCampaign() {
             severity="error"
             sx={{ marginTop: 2, marginBottom: 2 }}
             onClose={() => {
-              setEndAndWithdrawError(""); // erase the error msg.
-              window.location.reload(); // re-load the page to get the updated status
+              setEndAndWithdrawError("");
+              window.location.reload();
             }}
           >
             <AlertTitle>{endAndWithdrawError.name}</AlertTitle>
@@ -559,8 +531,6 @@ function ViewCampaign() {
             flexDirection={"column"}
             gap={1}
             sx={{ justifyContent: "center" }}
-            // component="form"
-            // onSubmit={abortCampaign}
           >
             <Typography
               variant="h6"
@@ -575,8 +545,8 @@ function ViewCampaign() {
                 severity="error"
                 sx={{ marginTop: 2, marginBottom: 2 }}
                 onClose={() => {
-                  setAbortingError(""); // erase the error msg.
-                  window.location.reload(); // re-load the page to get the updated status
+                  setAbortingError("");
+                  window.location.reload();
                 }}
               >
                 <AlertTitle>{abortingError.name}</AlertTitle>
