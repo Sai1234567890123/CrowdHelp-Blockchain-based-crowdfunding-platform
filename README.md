@@ -266,6 +266,10 @@ _(Run these commands by being in project root directory)_
 - To run on different test-net..
   - Use different URL in `hardhat.config.js`.
 
+## Troubleshooting
+
+If you encounter any errors during these steps, please provide the error message and context for further assistance.
+
 # References taken ⚓
 
 ## for understanding of crowdfunding idea with blockchain & developing smart-contract

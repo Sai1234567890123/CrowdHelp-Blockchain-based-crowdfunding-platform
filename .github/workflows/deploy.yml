@@ -1,0 +1,45 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Compile smart contracts
+        run: npx hardhat compile
+
+      - name: Run tests
+        run: npx hardhat test
+
+      - name: Deploy smart contracts
+        run: npx hardhat run scripts/deploy.js --network goerli_testnet
+        env:
+          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Update contract address
+        run: |
+          CONTRACT_ADDRESS=$(npx hardhat run scripts/deploy.js --network goerli_testnet | grep 'CrowdHelp deployed to:' | awk '{print $4}')
+          sed -i "s/const crowdHelpContractAddress = .*/const crowdHelpContractAddress = \"$CONTRACT_ADDRESS\";/" utils/contract/crowdHelp.js
+
+      - name: Build frontend
+        run: yarn build
+
+      - name: Deploy frontend
+        run: yarn deploy
