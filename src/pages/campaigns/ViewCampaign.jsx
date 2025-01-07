@@ -91,10 +91,16 @@ function ViewCampaign() {
     console.log("fetching a campaign..");
     let ignore = false;
     const fetchData = async () => {
-      await getCampaignDetails(campaignId).then((data) => {
-        console.info(data);
-        if (!ignore && data != undefined) setCampaignData(data);
-      });
+      try {
+        await getCampaignDetails(campaignId).then((data) => {
+          console.info(data);
+          if (!ignore && data != undefined) setCampaignData(data);
+        });
+      } catch (error) {
+        setResponseMsg("Error fetching campaign details: " + error.message);
+        setShowResponse(true);
+        setResponseSeverity("error");
+      }
     };
 
     fetchData();
@@ -139,6 +145,9 @@ function ViewCampaign() {
     } catch (err) {
       console.log(err);
       setAbortingError(err);
+      setResponseMsg("Error aborting campaign: " + err.message);
+      setShowResponse(true);
+      setResponseSeverity("error");
     }
   };
 
@@ -185,6 +194,9 @@ function ViewCampaign() {
     } catch (err) {
       console.log(err);
       setContributionError(err);
+      setResponseMsg("Error contributing funds: " + err.message);
+      setShowResponse(true);
+      setResponseSeverity("error");
     }
   };
 
@@ -202,6 +214,9 @@ function ViewCampaign() {
     } catch (err) {
       console.log(err);
       setEndAndWithdrawError(err);
+      setResponseMsg("Error ending campaign and withdrawing funds: " + err.message);
+      setShowResponse(true);
+      setResponseSeverity("error");
     }
   };
 
