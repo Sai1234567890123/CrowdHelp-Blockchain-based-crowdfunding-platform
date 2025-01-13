@@ -28,14 +28,14 @@ jobs:
         run: npx hardhat test
 
       - name: Deploy smart contracts
-        run: npx hardhat run scripts/deploy.js --network goerli_testnet
+        run: npx hardhat run scripts/deploy.js --network palm_testnet
         env:
           INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
 
       - name: Update contract address
         run: |
-          CONTRACT_ADDRESS=$(npx hardhat run scripts/deploy.js --network goerli_testnet | grep 'CrowdHelp deployed to:' | awk '{print $4}')
+          CONTRACT_ADDRESS=$(npx hardhat run scripts/deploy.js --network palm_testnet | grep 'CrowdHelp deployed to:' | awk '{print $4}')
           sed -i "s/const crowdHelpContractAddress = .*/const crowdHelpContractAddress = \"$CONTRACT_ADDRESS\";/" utils/contract/crowdHelp.js
 
       - name: Build frontend
