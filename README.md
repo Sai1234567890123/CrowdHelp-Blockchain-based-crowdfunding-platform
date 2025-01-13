@@ -266,9 +266,103 @@ _(Run these commands by being in project root directory)_
 - To run on different test-net..
   - Use different URL in `hardhat.config.js`.
 
-## Troubleshooting
+## Running the project locally in VSCode
 
-If you encounter any errors during these steps, please provide the error message and context for further assistance.
+### Step 1: Install VSCode
+
+Download and install Visual Studio Code (VSCode) from the official website: [https://code.visualstudio.com/](https://code.visualstudio.com/)
+
+### Step 2: Install Node.js and Yarn
+
+Make sure you have Node.js and Yarn installed on your machine. You can download Node.js from [https://nodejs.org/](https://nodejs.org/) and install Yarn by running the following command:
+
+```sh
+npm install -g yarn
+```
+
+### Step 3: Clone the repository
+
+Clone the repository to your local machine using the following command:
+
+```sh
+git clone https://github.com/Sai1234567890123/CrowdHelp-Blockchain-based-crowdfunding-platform.git
+```
+
+### Step 4: Open the project in VSCode
+
+Open Visual Studio Code and navigate to the cloned repository folder.
+
+### Step 5: Install project dependencies
+
+Open a terminal in VSCode and run the following command to install the project dependencies:
+
+```sh
+yarn install
+```
+
+### Step 6: Set up the development environment
+
+Create a new file named `.env.local` in the project's root directory and add the following content:
+
+```sh
+INFURA_API_KEY=<Your API_key here>
+PRIVATE_KEY=<Your private key>
+```
+
+### Step 7: Run the local hardhat network
+
+In the terminal, run the following command to start the local hardhat network:
+
+```sh
+npx hardhat node
+```
+
+### Step 8: Compile and deploy the smart contract
+
+In the terminal, run the following commands to compile and deploy the smart contract:
+
+```sh
+npx hardhat compile
+npx hardhat run scripts/deploy.js --network localhost
+```
+
+### Step 9: Update the contract address
+
+Copy the contract address from the deployment output and update the `crowdHelpContractAddress` variable in the `utils/contract/crowdHelp.js` file.
+
+### Step 10: Run the frontend
+
+In the terminal, run the following command to start the frontend development server:
+
+```sh
+yarn dev
+```
+
+The frontend should now be running on `http://127.0.0.1:5173`.
+
+## Troubleshooting common errors
+
+### Error: "yarn: command not found"
+
+If you encounter this error, it means that Yarn is not installed or not added to your system's PATH. Install Yarn by running the following command:
+
+```sh
+npm install -g yarn
+```
+
+### Error: "Cannot find module 'hardhat'"
+
+If you encounter this error, it means that the Hardhat package is not installed. Install the Hardhat package by running the following command:
+
+```sh
+yarn add hardhat
+```
+
+### Error: "Contract deployment failed"
+
+If you encounter this error, make sure that your `.env.local` file contains the correct `INFURA_API_KEY` and `PRIVATE_KEY`. Also, ensure that you have sufficient funds in your wallet for deploying the contract.
+
+If you encounter any other errors or need further assistance, please provide the error message and context for further assistance.
 
 # References taken ⚓
 
