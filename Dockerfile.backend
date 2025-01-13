@@ -1,0 +1,21 @@
+# Use Node.js image for backend
+FROM node:18
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Install Hardhat globally
+RUN npm install -g hardhat
+
+# Expose port for the local blockchain
+EXPOSE 8545
+
+# Start the Hardhat network
+CMD ["npx", "hardhat", "node"]
