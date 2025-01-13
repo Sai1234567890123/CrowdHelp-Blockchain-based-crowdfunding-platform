@@ -29,7 +29,7 @@
 
 ## Current Status of the project 📃
 
-- Application is deployed on Netlify _(for frontend)_ and Infura _(Goerli test network)_ with essential features _(listed below)_.
+- Application is deployed on Netlify _(for frontend)_ and Infura _(Palm test network)_ with essential features _(listed below)_.
 - Please checkout at [here](https://crowdhelp.netlify.app). Found any bugs? or felt like need some features -- please feel free to raise a new issue or submit your pull request.
 - **Thanks** for your time in looking into this project.
 
@@ -151,9 +151,9 @@ Ready with understanding and basic setup.
 
 ### **6. Viewing [any] campaign's transactions**
 
-1. Any user can view the campaign's transactions in [etherscan.io](https://goerli.etherscan.io) -- By clicking on **View on Goerli therscan** link on any campaign page.
+1. Any user can view the campaign's transactions in [etherscan.io](https://palm.chainlens.com) -- By clicking on **View on Palm therscan** link on any campaign page.
    ![](docs/ViewingTransactionHistoryInEtherScan_0.png)
-2. This opens up a new page of `goerli.etherscan.io`, showing the transactions.
+2. This opens up a new page of `palm.chainlens.com`, showing the transactions.
    ![](docs/ViewingTransactionHistoryInEtherScan.png)
 
 - This provides transparency and trust that,
@@ -184,20 +184,20 @@ Ready with understanding and basic setup.
 |                          [metamask](https://metamask.io/) | A digital wallet as a browser extension, to manage different test accounts & authorize transactions. |
 | [**Firefox**](https://www.mozilla.org/en-US/firefox/new/) | Browser, for inspection of code with console.                                                        |
 |                       [Netlify](https://www.netlify.com/) | For deploying frontend site.                                                                         |
-|                          [Infura](https://www.infura.io/) | To deploy smart-contract to remotely in `Goerli` test network.                                       |
+|                          [Infura](https://www.infura.io/) | To deploy smart-contract to remotely in `Palm test network`.                                         |
 |                              [Yarn](https://yarnpkg.com/) | A package manager, to add & remove packages for the project as per need.                             |
 
 # How to run _(locally & remotely)_? 🏃‍♂️
 
 ## Pre-requisites 🛠️
 
-- Metamask wallet with some `GoerliETH`, fine even if had < 0.5 ETH _(for testing purposes)_.
-  - Lacking GoerliETH ? -- get it free of 0.2 ETH/day at [Alchemy's Goerli faucet](https://goerlifaucet.com/) -- note that, this needs sign-up.
+- Metamask wallet with some `PalmETH`, fine even if had < 0.5 ETH _(for testing purposes)_.
+  - Lacking PalmETH ? -- get it free of 0.2 ETH/day at [Alchemy's Palm faucet](https://palmfaucet.com/) -- note that, this needs sign-up.
 - Clone this repo.
 
 _(ONLY for running remotely)_
 
-- Create an account on [Infura](https://infura.io), can also be on [Alchemy](https://www.alchemy.com/). \_(This project used Infura with `goerli-testnet`)
+- Create an account on [Infura](https://infura.io), can also be on [Alchemy](https://www.alchemy.com/). \_(This project used Infura with `palm-testnet`)
 - Create a new project & get an end-point of it.
 - Create a new file with name `.env.local` in project's root directory.
 - Store the API key as ..
@@ -259,9 +259,9 @@ _(Run these commands by being in project root directory)_
 
 ## Running remotely 🏃‍♂️
 
-- Follow the above steps. Now just change the network as `goerli_testnet` while deploying.
+- Follow the above steps. Now just change the network as `palm_testnet` while deploying.
   ```
-   npx hardhat run scripts/deploy.js --network goerli_testnet
+   npx hardhat run scripts/deploy.js --network palm_testnet
   ```
 - To run on different test-net..
   - Use different URL in `hardhat.config.js`.
