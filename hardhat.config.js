@@ -26,15 +26,8 @@ module.exports = {
       url: "http://127.0.0.1:8545",
       chainId: 31337,
     },
-    palm_testnet: {
-      url: `https://palm-testnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
-      gasPrice: 1000,
-      saveDeployments: true,
-      deploy: ["scripts/"],
-    },
-    palm_mainnet: {
-      url: `https://palm-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+    sepolia: {
+      url: `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: [`0x${process.env.PRIVATE_KEY}`],
       gasPrice: 1000,
       saveDeployments: true,
