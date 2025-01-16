@@ -257,6 +257,23 @@ _(Run these commands by being in project root directory)_
   yarn upgrade
   ```
 
+### Testing the repository locally with the provided environment variables
+
+To test the repository locally with the provided environment variables, follow these steps:
+
+1. Ensure that the `.env.local` file in the project's root directory contains the following content:
+
+```sh
+INFURA_API_KEY=10fb42dfddd54e1da4458e10fe2d5b0d
+PRIVATE_KEY=1015ef279a602270213849cc153698f7832701043173a055b5c801972eaa3a6a
+```
+
+2. Follow the steps mentioned in the "Running locally" section to set up and run the project.
+
+3. Verify that the environment variables are being read correctly by checking the console output for the `INFURA_API_KEY` and `PRIVATE_KEY` values.
+
+4. Ensure that the smart contract is deployed successfully using the provided environment variables.
+
 ## Running remotely 🏃‍♂️
 
 - Follow the above steps. Now just change the network as `sepolia` while deploying.
