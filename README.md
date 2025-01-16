@@ -151,9 +151,9 @@ Ready with understanding and basic setup.
 
 ### **6. Viewing [any] campaign's transactions**
 
-1. Any user can view the campaign's transactions in [etherscan.io](https://palm.chainlens.com) -- By clicking on **View on Palm therscan** link on any campaign page.
+1. Any user can view the campaign's transactions in [etherscan.io](https://sepolia.etherscan.io) -- By clicking on **View on Sepolia Etherscan** link on any campaign page.
    ![](docs/ViewingTransactionHistoryInEtherScan_0.png)
-2. This opens up a new page of `palm.chainlens.com`, showing the transactions.
+2. This opens up a new page of `sepolia.etherscan.io`, showing the transactions.
    ![](docs/ViewingTransactionHistoryInEtherScan.png)
 
 - This provides transparency and trust that,
@@ -259,9 +259,9 @@ _(Run these commands by being in project root directory)_
 
 ## Running remotely 🏃‍♂️
 
-- Follow the above steps. Now just change the network as `palm_testnet` while deploying.
+- Follow the above steps. Now just change the network as `sepolia` while deploying.
   ```
-   npx hardhat run scripts/deploy.js --network palm_testnet
+   npx hardhat run scripts/deploy.js --network sepolia
   ```
 - To run on different test-net..
   - Use different URL in `hardhat.config.js`.
