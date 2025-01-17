@@ -98,7 +98,6 @@ function HomePage() {
           <Stack>
             <Stack
               direction={"row"}
-              justifyContent="space-between"
               alignItems="center"
               // width={10}
             >
