@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import EmailIcon from "@mui/icons-material/Email";
-import BadgeUnstyled from "@mui/base/BadgeUnstyled";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
