@@ -220,6 +220,7 @@ function FillCampaignDetails() {
                 direction="row"
                 justify="center"
                 alignItems="stretch"
+                container
               >
                 <Grid item xs={6} spacing={0}>
                   <Box display={"flex"} flexDirection="column" gap={2}>
@@ -355,7 +356,7 @@ function FillCampaignDetails() {
                   />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} container>
                   <FormControlLabel
                     control={
                       <Checkbox
