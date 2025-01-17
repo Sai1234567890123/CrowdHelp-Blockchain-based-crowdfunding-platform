@@ -381,6 +381,10 @@ If you encounter this error, make sure that your `.env.local` file contains the 
 
 If you encounter any other errors or need further assistance, please provide the error message and context for further assistance.
 
+## Verify Network Synchronization
+
+Ensure that the node provider (e.g., Infura) is fully synced. This is crucial for accurate data retrieval and interaction with the blockchain.
+
 # References taken ⚓
 
 ## for understanding of crowdfunding idea with blockchain & developing smart-contract
