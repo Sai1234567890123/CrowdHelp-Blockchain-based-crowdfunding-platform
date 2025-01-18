@@ -44,7 +44,7 @@ function ViewCampaign() {
   const enteredAmountRef = React.useRef(0);
 
   const [campaignData, setCampaignData] = React.useState({});
-  const wallet = useWallet({ chainId: 31337, rpcUrl: "http://127.0.0.1:8545" });
+  const wallet = useWallet();
 
   const {
     handleSubmit: contributionHandleSubmit,
