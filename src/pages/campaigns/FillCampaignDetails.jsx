@@ -38,7 +38,7 @@ import web3 from "../../../utils/web3";
 const api_url = "http://localhost:4000/api/";
 
 function FillCampaignDetails() {
-  const wallet = useWallet();
+  const wallet = useWallet({ chainId: 31337, rpcUrl: "http://127.0.0.1:8545" });
   const navigate = useNavigate();
 
   // hooks for getting form data..
