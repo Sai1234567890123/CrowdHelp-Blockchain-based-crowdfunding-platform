@@ -16,6 +16,8 @@ import React from "react";
 import FillCampaignDetails from "./FillCampaignDetails";
 import SetMileStones from "./SetMileStones";
 import ReviewCampaignDetails from "./ReviewCampaignDetails";
+import { UseWalletProvider } from "use-wallet";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -104,41 +106,48 @@ function CreateCampaignWrapper() {
             <Typography component="h1" variant="h4" align="center">
               Create Campaign
             </Typography>
-            <>
-              {activeStep == steps.length ? (
-                <>
-                  <Typography variant="h5" gutterBottom>
-                    Welcome to the community..!!
-                  </Typography>
-                  <Typography variant="subtitle3">
-                    Thanks for joining in our team to make this world a better
-                    place to live.
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Campaign has created successfully. An acknowledgement will
-                    be sent to your registered maill-id.
-                  </Typography>
-                </>
-              ) : (
-                <>
-                  {getStepContent(activeStep)}
-                  <div>
-                    {activeStep !== 0 && (
-                      <Button onClick={handleBack}>Back</Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                    >
-                      {activeStep === steps.length - 1
-                        ? "Create Campaign"
-                        : "Next"}
-                    </Button>
-                  </div>
-                </>
-              )}
-            </>
+            <UseWalletProvider
+              config={{
+                chainId: 31337,
+                rpcUrl: "http://127.0.0.1:8545",
+              }}
+            >
+              <>
+                {activeStep == steps.length ? (
+                  <>
+                    <Typography variant="h5" gutterBottom>
+                      Welcome to the community..!!
+                    </Typography>
+                    <Typography variant="subtitle3">
+                      Thanks for joining in our team to make this world a better
+                      place to live.
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      Campaign has created successfully. An acknowledgement will
+                      be sent to your registered maill-id.
+                    </Typography>
+                  </>
+                ) : (
+                  <>
+                    {getStepContent(activeStep)}
+                    <div>
+                      {activeStep !== 0 && (
+                        <Button onClick={handleBack}>Back</Button>
+                      )}
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                      >
+                        {activeStep === steps.length - 1
+                          ? "Create Campaign"
+                          : "Next"}
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </>
+            </UseWalletProvider>
           </StyledDivPaper>
         </StyledDivLayout>
       </Box>

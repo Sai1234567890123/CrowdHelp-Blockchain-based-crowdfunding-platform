@@ -11,7 +11,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ErrorBoundary>
       <Web3ReactProvider>
-        <UseWalletProvider>
+        <UseWalletProvider
+          config={{
+            chainId: 31337,
+            rpcUrl: "http://127.0.0.1:8545",
+          }}
+        >
           <App />
         </UseWalletProvider>
       </Web3ReactProvider>
