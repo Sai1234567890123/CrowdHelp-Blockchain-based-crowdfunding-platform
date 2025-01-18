@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import "./config/firebase-config";  // for firebase.
+import { app, auth} from "./config/firebase-config";  // for firebase.
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
