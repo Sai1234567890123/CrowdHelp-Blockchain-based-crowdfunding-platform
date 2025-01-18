@@ -18,11 +18,10 @@ import { UseWalletProvider } from "use-wallet";
 function App() {
   return (
     <UseWalletProvider
-      chainId={4}
+      chainId={31337}
       connectors={{
         walletconnect: {
-          rpcUrl:
-            "https://palm-testnet.infura.io/v3/eaf842956c36444c8aaf54163a47e0d2",
+          rpcUrl: "http://127.0.0.1:8545",
         },
       }}
     >
