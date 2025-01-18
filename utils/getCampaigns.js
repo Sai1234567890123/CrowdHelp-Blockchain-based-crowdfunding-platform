@@ -40,6 +40,10 @@ export const getCampaignDetails = async (campaignId) => {
       console.error("Invalid campaignId provided.");
       return null;
     }
+    if (!web3.utils.checkAddressChecksum(campaignId)) {
+      console.error("Invalid campaignId checksum.");
+      return null;
+    }
     console.log("Campaign ID being passed to constructor:", campaignId);
     const summary = await Campaign(campaignId).methods.getCampaignSummary().call();
     console.log(summary);
