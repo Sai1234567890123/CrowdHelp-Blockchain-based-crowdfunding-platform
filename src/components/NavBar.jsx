@@ -158,7 +158,10 @@ function NavBar() {
                 loadingIndicator="Connecting..."
                 // sx={{ mt: 3, mb: 2 }}
                 endIcon={<AccountBalanceWalletIcon />}
-                onClick={() => wallet.connect()}
+                onClick={() => wallet.connect({
+                  chainId: 31337,
+                  rpcUrl: "http://127.0.0.1:8545",
+                })}
               >
                 Connect Wallet
               </LoadingButton>
