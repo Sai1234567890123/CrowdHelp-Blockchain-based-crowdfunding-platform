@@ -32,18 +32,28 @@ export const getCampaignsSummary = async (campaigns) => {
 
 export const getCampaignDetails = async (campaignId) => {
   try {
+    if (!campaignId) {
+      console.error("Invalid campaignId provided.");
+      return null;
+    }
     if (!web3.utils.isAddress(campaignId)) {
-      throw new Error("Invalid campaignId");
+      console.error("Invalid campaignId provided.");
+      return null;
     }
     console.log("Campaign ID being passed to constructor:", campaignId);
     const summary = await Campaign(campaignId).methods.getCampaignSummary().call();
     console.log(summary);
     return formatSummary(summary, campaignId);
   } catch (err) {
-    console.error("[ERROR] occurred in getting a campaign summary");
-    console.error("Campaign ID:", campaignId);
-    console.error("Error message:", err.message);
-    throw err;
+    if (err.message.includes("gas")) {
+      console.error("Gas issue encountered:", err.message);
+    } else if (err.message.includes("network")) {
+      console.error("Network connection problem:", err.message);
+    } else {
+      console.error("Error getting campaign summary:", err.message);
+    }
+    console.error("Error getting campaign summary: ", err);
+    return null;
   }
 };
 
