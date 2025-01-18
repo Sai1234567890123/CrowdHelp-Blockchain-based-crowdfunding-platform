@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "vscode": "yarn dev"
+    "vscode": "yarn dev",
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
