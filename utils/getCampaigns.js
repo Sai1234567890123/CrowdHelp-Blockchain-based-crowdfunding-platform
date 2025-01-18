@@ -35,6 +35,7 @@ export const getCampaignDetails = async (campaignId) => {
     if (!web3.utils.isAddress(campaignId)) {
       throw new Error("Invalid campaignId");
     }
+    console.log("Campaign ID being passed to constructor:", campaignId);
     const summary = await Campaign(campaignId).methods.getCampaignSummary().call();
     console.log(summary);
     return formatSummary(summary, campaignId);
